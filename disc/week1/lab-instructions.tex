@@ -101,8 +101,9 @@ execute:
   echo: false
 ---
 \end{verbatim}
+There is a small example notebook in \texttt{stat-215-a-gsi/disc/week1} which you can look at to see how to set this up and also display figures when rendering with Quarto.
 
-I think converting a Jupyter notebook to PDF (using Quarto or otherwise) requires you to have a local \LaTeX\ installation. If you have trouble with this, please talk with me.
+I think converting a Jupyter notebook to PDF (using Quarto or otherwise) requires you to have a local \LaTeX\ installation. I think quarto can install a small \LaTeX\ installation for itself with \texttt{quarto install tinytex}. If you have trouble with this, please talk with me.
 
 If you have interactive elements in your Jupyter notebook, feel free to also export it to HTML (\texttt{quarto render labX.ipynb --execute}) and include that with your report, so I can play around with it!
 
@@ -139,7 +140,7 @@ If you are using a \LaTeX\ document for your report, you can include the figure 
 
 \textbf{LLM usage:} Each lab will describe the policy on using LLMs for coding the lab.
 
-\textbf{Your code should not be ugly}. I recommend following the Google Python Style Guide: \url{https://google.github.io/styleguide/pyguide.html}. You don't have to follow it super strictly, but you should write clean, readable code, and that is a good guide to do so. There are also many tools to auto-format your code to make it look nice, like \texttt{black}.
+\textbf{Your code should not be ugly}. I recommend following the Google Python Style Guide: \url{https://google.github.io/styleguide/pyguide.html}. Pay special attention to guidelines for the names of variables, functions, and classes. Variable names in Python should be in snake\_case, not CamelCase! You don't have to follow the style guide super strictly, but you should write clean, readable code, and the Google one is a good guide to do so. There are also many tools to auto-format the whitespace of your code to make it look nice, like \texttt{black}.
 
 \textbf{Your code should be well-commented}.
 \begin{itemize}
