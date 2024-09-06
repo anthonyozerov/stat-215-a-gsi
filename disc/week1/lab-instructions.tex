@@ -99,7 +99,7 @@ quarto render labX.ipynb --to pdf --execute
 \end{verbatim}
 \texttt{quarto} is a software which, among other things, can convert Jupyter notebooks to much nicer PDFs than Jupyter's built-in converter. You can install it in your \texttt{215a} environment with \texttt{conda install -c conda-forge quarto}, or install it in some other way on your system. NOTE: if quarto is used to execute a notebook, it must be run from within the appropriate Conda environment.
 
-Quarto also has a lot of tools for customizing the PDF output, (defining a title, adding figure captions, etc.) which are not otherwise available in Jupyter. You can read more about using Quarto with ipynb files here: https://quarto.org/docs/tools/jupyter-lab.html.
+Quarto also has a lot of tools for customizing the PDF output, (defining a title, adding figure captions, etc.) which are not otherwise available in Jupyter. You can read more about using Quarto with ipynb files here: \url{https://quarto.org/docs/tools/jupyter-lab.html}, and here: \url{https://quarto.org/docs/get-started/authoring/jupyter.html}.
 
 In any case, \textbf{Your PDF report must not contain any code}. For converting with Quarto, here is an example first-block in your .ipynb (which should be a ``Raw'' block as opposed to ``Python'' or ``Markdown'') which defines a title and prevents code from being displayed in the PDF:
 \begin{verbatim}
