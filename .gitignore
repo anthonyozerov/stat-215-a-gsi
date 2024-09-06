@@ -1,0 +1,17 @@
+*.log
+*.aux
+*.bbl
+*.out
+
+/lab_final/
+
+.idea
+
+/scripts/
+/gsi/
+
+.DS_Store
+
+__pycache__
+
+.ipynb_checkpoints

@@ -25,7 +25,15 @@ Copy over the lab materials from the \texttt{stat-215-a-gsi} repository to your 
 
 \section{Installation / environment setup}
 
-These instructions will work well on MacOS and Linux. If you are using Windows, I \textit{highly recommend} installing Windows Subsystem for Linux (WSL) and doing everything there. This will give you access to a Unix environment on your Windows machine. It is essential that you use a Unix environment for this class.
+\subsection{Unix environment}
+\textbf{It is essential that you use a Unix environment for this class}. MacOS and Linux are both Unix environments. If you are using Windows, I \textit{highly recommend} installing Windows Subsystem for Linux (WSL) and doing everything there. This will give you access to a Unix environment on your Windows machine. If you would like to install WSL, here some resources:
+\begin{itemize}
+    \item Installing WSL: \url{https://learn.microsoft.com/en-us/windows/wsl/install}
+    \item Using VSCode on Windows with your WSL setup: \url{https://code.visualstudio.com/docs/remote/wsl}
+\end{itemize}
+In principle, you don't \textit{have} to use a Unix environment. But using one will make things easier. And if something isn't working in your non-Unix environment, I likely won't be able to help you.
+
+\subsection{Conda}
 
 First, install \texttt{miniconda} or \texttt{conda} (don't install Anaconda).
 
@@ -116,7 +124,7 @@ If you do use both, you should set up the interplay between them cleanly. In gen
 \begin{itemize}
     \item Export data from Python to a CSV file
     \item Load it in R, and possibly reshape it somehow (see \texttt{dplyr})
-    \item Use ggplot (or other plotting methods) to make a figure.
+    \item Use \texttt{ggplot} (or other plotting methods) to make a figure.
     \item Save the figure in the \texttt{figs} directory of your lab.
 \end{itemize}
 If you are using a Jupyter notebook for the report, you can use the following code to display the figure you made in R:
@@ -144,7 +152,7 @@ If you are using a \LaTeX\ document for your report, you can include the figure 
 
 \textbf{Your code should be well-commented}.
 \begin{itemize}
-  \item There should be comments throughout which explain what is going on. Please also use.
+  \item There should be comments throughout which explain what is going on.
   \item Use docstrings for functions and classes. Feel free to follow any style guide for this.
 \end{itemize}
 (Hint: LLMs are pretty good at documenting code you've written!)
@@ -193,13 +201,20 @@ conda activate 215a-test
 You can do likewise with your \texttt{215a-r} environment and \texttt{environment-r.yaml} if you are using one.
 
 \texttt{run.sh} should be a shell script which runs all of the code needed to generate your results. It can be something as simple as:
-
 \begin{verbatim}
 #!/bin/bash
 conda activate 215a
 python main.py
 \end{verbatim}
-Or something more complicated like:
+This will work if you just have a \texttt{main.py} script which produces all of your results, which are then loaded in a .tex file to make your report. If you are using a Jupyter notebook for your report and running the notebook produces all of the intermediate results and figures you need, your \texttt{run.sh} could look like:
+\begin{verbatim}
+#!/bin/bash
+conda activate 215a
+jupyter nbconvert --to notebook --execute --inplace labX.ipynb
+\end{verbatim}
+The final command here is equivalent to opening the notebook in Jupyter Lab, hitting ``Restart Kernel and Run All Cells'', and saving the notebook. The command runs all of the cells in the notebook in order, and saves the output in the notebook itself.
+
+You could also have something more complicated like this, if you are using a mix of Python and R and have some scripts producing intermediate data/results:
 \begin{verbatim}
 #!/bin/bash
 
@@ -216,31 +231,8 @@ conda activate 215a               # reactivates your 215a environment
 # executes a Jupyter notebook containing some analysis
 jupyter nbconvert --to notebook --execute --inplace labX.ipynb
 \end{verbatim}
-The final command is equivalent to opening the notebook in Jupyter Lab, hitting ``Restart Kernel and Run All Cells'', and saving the notebook. The command runs all of the cells in the notebook in order, and saves the output in the notebook itself.
-
 Don't worry about including code to make a PDF of your report in \texttt{run.sh}.
 
 \textbf{I will not grade harshly on environment.yaml and run.sh}. They are just there to make sure I can reproduce your results using your code. The most important aspect of \textbf{run.sh} is that it defines what order to run your code in. If you'd like, feel free to also experiment with using a Makefile to define how your code should be run.
-
-\iffalse This will be done by using the following commands:
-\begin{verbatim}
-git clone https://github.com/USERNAME/stat-215-a.git
-cd stat-215-a/labs/labX
-if [ -f code/environment.yaml ]; then
-    conda env create -f code/environment.yaml
-else
-    echo "environment.yaml not found!"
-fi
-if [ -f code/environment-r.yaml ]; then
-    conda env create -f code/environment-r.yaml
-fi
-cd code
-bash run.sh
-cd ..
-if [ ! -f report/labX.pdf ]; then
-    echo "report/labX.pdf not found!"
-fi
-\end{verbatim}
-\fi
 
 \end{document}
