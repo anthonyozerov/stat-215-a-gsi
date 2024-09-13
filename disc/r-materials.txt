@@ -1,0 +1,3 @@
+Materials for learning R are available in last year's GSI repo.
+(Feel free to use R for data visualization)
+https://github.com/cz-ye/stat-215-a-gsi
