@@ -41,11 +41,7 @@ These instructions are based on previous lab materials by Chengzhong Ye, Theo Sa
 
 This is the first time STAT215A is being taught in Python, so these instructions have been heavily adapted from previous years. They are provisional and will likely be modified throughout the course as we progress through the labs and get feedback.
 
-\section{Obtaining lab materials and setting up lab directory}
-Copy over the lab materials from the \texttt{stat-215-a-gsi} repository to your own repository \texttt{stat-215-a}. i.e.~the \texttt{stat-215-a-gsi/labX} directory should be copied to \texttt{stat-215-a/labX}. \textbf{Do not} do the lab in some other folder on your computer and copy it to your repo at the last moment. It is easiest to just do the whole lab within the repository directory.
-
-\section{Installation / environment setup}
-
+\section{Prequisites}
 \subsection{Unix environment}
 \textbf{It is essential that you use a Unix environment for this class}. MacOS and Linux are both Unix environments. If you are using Windows, I \textit{highly recommend} installing Windows Subsystem for Linux (WSL) (if you haven't already) and doing everything there. This will give you access to a Unix environment on your Windows machine. If you would like to install WSL, here some resources:
 \begin{itemize}
@@ -53,12 +49,17 @@ Copy over the lab materials from the \texttt{stat-215-a-gsi} repository to your 
     \item Using VSCode on Windows with your WSL setup: \url{https://code.visualstudio.com/docs/remote/wsl}
 \end{itemize}
 In principle, you don't \textit{have} to use a Unix environment. But using one will make things easier. And if something isn't working in your non-Unix environment, I likely won't be able to help you.
+\subsection{Set up your stat-215-a repository}
+See the Week1 discussion section slides for instructions. Your lab submission will be made through your private \texttt{stat-215-a} repository.
+\subsection{Obtain lab materials}
+Copy over the lab materials from the \texttt{stat-215-a-gsi} repository to your own repository \texttt{stat-215-a}. i.e.~the \texttt{stat-215-a-gsi/labX} directory should be copied to \texttt{stat-215-a/labX}. \textbf{Do not} do the lab in some other folder on your computer and copy it to your repo at the last moment. It is easiest to just do the whole lab within the repository directory.
 
-\subsection{Conda}
+\section{Environment setup}
 
+\subsection{Conda Installation}
 If you haven't already, install \texttt{miniconda} or \texttt{conda} (don't install Anaconda).
 
-\subsubsection{Making/updating an environment from the lab's environment.yaml file}
+\subsection{Making/updating an environment from the lab's environment.yaml file}
 Set up your 215a environment using the provided \texttt{labX/code/environment.yaml}. First, take a look at the file to see how it is formatted; it is just a plaintext list of dependencies. Navigate to your \texttt{labX} directory in your own \texttt{stat-215-a} repo. If you don't yet have an environment named ``215a'' (you can check using \texttt{conda env list}), run this command:
 \begin{verbatim}
 conda env create -f code/environment.yaml
@@ -69,7 +70,7 @@ conda env update -f code/environment.yaml
 \end{verbatim}
 This will update your environment to add the packages listed in the \texttt{environment.yaml} file.
 
-\subsubsection{Checking your environment}
+\subsection{Checking that your environment works}
 Now let's check that the environment works:
 \begin{enumerate}
     \item Enter your environment using \texttt{conda activate 215a}.
@@ -77,14 +78,14 @@ Now let's check that the environment works:
     \item Open a new notebook
     \item Run \texttt{import sys} then \texttt{print sys.executable}. The output should be a Python executable associated with your \texttt{215a} environment, and should end in \texttt{215a/bin/python}.
 \end{enumerate}
-\subsubsection{Making a conda environment for R}
+\subsection{Making a conda environment for R}
 If you would like to also use \texttt{R} (e.g. for figures), you can install it as well. These days you can install \texttt{R} and \texttt{Rstudio} using \texttt{conda}. You don't have to, but I would recommend making a separate conda environment for \texttt{R} to avoid any conflicts. There is also an \texttt{code/environment-r.yaml} file that you can use to set up an \texttt{R} environment. You can create a new \texttt{215a-r} environment with:
 \begin{verbatim}
 conda env create -f code/environment-r.yaml
 \end{verbatim}
 If you run \texttt{conda activate 215a-r} you will be able to use \texttt{R} from the command-line. If you install \texttt{jupyterlab} in this environment (\texttt{pip install jupyterlab}), you'll be able to use it in Jupyter notebooks too. The environment also contains an installation of \texttt{Rstudio}, which you can run with \texttt{rstudio} from the command line while you are in the \texttt{215a-r} environment.
 
-\subsubsection{MacOS issues}
+\subsection{MacOS issues}
 \textit{Note:} Recent Apple devices use an arm64 architecture as opposed to an x86\_64 architecture. Many conda packages are not compiled for arm64, so you may run into issues when installing packages. You may be able to get around this by running \texttt{conda config --env --set subdir osx-64} after creating a new, empty conda environment. e.g.~you might be able to do:
 \begin{verbatim}
 conda create -n 215a
@@ -117,8 +118,12 @@ Also take note of these guidelines:
     \item You must make an effort to communicate effectively. Think as if you are writing a blog post or an informal journal article.
     \item The data from each lab comes from an existing research paper, which will be given to you. You must also make an effort to incorporate domain information and knowledge in the writeup to give the report some context. For example, it is good habit to explain in the introduction why your problem is important within the domain, to describe any connections between the statistical models/algorithms and the true phenomenon at hand, and to conclude with a discussion of the impacts of the results within the domain context. Ideally, domain knowledge should be incorporated at all stages of the data science pipeline.
     \item Favour simplicity over complexity. It is much more important to be thorough and to communicate effectively than to come up with some super fancy modeling idea that no one understands. If a super fancy is needed or justified, then feel free to go for it.
-    \item Keep in mind that there are two types of visualization: \textit{exploratory} and \textit{explanatory}. Exploratory visualizations are graphics that you produce to help \textit{you} understand the data, whereas explanatory visualizations are final versions of a small subset of these figures that you produce to explain to \textit{other people} what is in the data. Typically you will produce many, many exploratory plots and only a few key explanatory plots that answer specific questions. Choose your explanatory plots carefully, and ask the following question of every figure in your report: ``Does this figure add anything? Is my story strictly worse when I remove it?'' If the answer to either question is ``no'', then you should remove the figure. Just because you spent a lot of time making a really pretty figure, doesn't mean that it adds anything to your story. There have been many times in my life where I have spent an hour or two making a really awesome plot only to decide the next day that it is actually fairly irrelevant to my main points and removing it.
 \end{itemize}
+
+\subsection{Figure guidelines}
+Keep in mind that there are two types of visualization: \textit{exploratory} and \textit{explanatory}. Exploratory visualizations are graphics that you produce to help \textit{you} understand the data, whereas explanatory visualizations are final versions of a small subset of these figures that you produce to explain to \textit{other people} what is in the data. Typically you will produce many, many exploratory plots and only a few key explanatory plots that answer specific questions. Choose your explanatory plots carefully, and ask the following question of every figure in your report: ``Does this figure add anything? Is my story strictly worse when I remove it?'' If the answer to either question is ``no'', then you should remove the figure. Just because you spent a lot of time making a really pretty figure, doesn't mean that it adds anything to your story. There have been many times in my life where I have spent an hour or two making a really awesome plot only to decide the next day that it is actually fairly irrelevant to my main points and removing it.
+
+Look through the Week 3 slides from discussion section to recall our discussion on the qualities of a good figure and how to make one!
 
 \subsection{Jupyter notebook or LaTeX}
 
