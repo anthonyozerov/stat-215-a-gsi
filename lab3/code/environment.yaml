@@ -12,3 +12,6 @@ dependencies:
     - scikit-learn
     - jupyterlab
     - pyreadr
+    - joblib
+    - cython
+    - numba
