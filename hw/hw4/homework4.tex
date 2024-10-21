@@ -1,0 +1,108 @@
+%% LyX 2.2.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\setlength{\parskip}{\smallskipamount}
+\setlength{\parindent}{0pt}
+\usepackage{url}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{xcolor}
+
+% define math shortcuts
+\DeclareMathOperator{\x}{\mathbf{x}}
+\DeclareMathOperator{\y}{\mathbf{y}}
+\DeclareMathOperator{\uu}{\mathbf{u}}
+\DeclareMathOperator{\vv}{\mathbf{v}}
+\DeclareMathOperator{\rr}{\mathbf{r}}
+\DeclareMathOperator{\U}{\mathbf{U}}
+\DeclareMathOperator{\V}{\mathbf{V}}
+\DeclareMathOperator{\A}{\mathbf{A}}
+\DeclareMathOperator{\M}{\mathbf{M}}
+\DeclareMathOperator{\N}{\mathbf{N}}
+\DeclareMathOperator{\D}{\mathbf{D}}
+\DeclareMathOperator{\Q}{\mathbf{Q}}
+\DeclareMathOperator{\I}{\mathbf{I}}
+\DeclareMathOperator{\X}{\mathbf{X}}
+\DeclareMathOperator{\W}{\mathbf{W}}
+\DeclareMathOperator{\HH}{\mathbf{H}}
+\DeclareMathOperator{\R}{\mathbf{R}}
+\DeclareMathOperator{\real}{\mathbb{R}}
+\DeclareMathOperator{\Xhat}{\vphantom{\mathbf{X}} \smash[t]{\hat{\mathbf{X}}}}
+\DeclareMathOperator{\Xbar}{\vphantom{\mathbf{X}} \smash[t]{\bar{\mathbf{X}}}}
+\DeclareMathOperator{\bbeta}{\boldsymbol{\beta}}
+\DeclareMathOperator{\mmu}{\boldsymbol{\mu}}
+\DeclareMathOperator{\llambda}{\boldsymbol{\lambda}}
+\DeclareMathOperator{\Lam}{\boldsymbol{\Lambda}}
+\DeclareMathOperator{\Delt}{\boldsymbol{\Delta}}
+\DeclareMathOperator{\Sig}{\boldsymbol{\Sigma}}
+\DeclareMathOperator{\Thet}{\boldsymbol{\Theta}}
+\DeclareMathOperator*{\argmin}{\mathrm{argmin} ~ }
+\DeclareMathOperator*{\argmax}{\mathrm{argmax} ~ }
+\DeclareMathOperator{\Var}{\text{Var}}
+\newcommand{\norm}[1]{\lVert #1  \rVert}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\newlength{\lyxlabelwidth}      % auxiliary length 
+
+\@ifundefined{date}{}{\date{}}
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+
+\title{Homework 4\linebreak{}
+Stat 215A, Fall 2024}
+\maketitle
+\begin{center}
+\textbf{Due:} this homework is not required and will not count towards your grade. But it is good practice for the midterm.\\
+\par\end{center}
+
+\section{EM Algorithm}
+Suppose $X_{1}, \ldots, X_{n}$ are i.i.d. observations from a mixture of two Poisson distributions, Pois $\left(\mu_{0}\right)$ and $\operatorname{Pois}\left(\mu_{1}\right)$, with mixing probabilities of $\pi$ and $1-\pi$, respectively. That is, there is an initial probability $\pi$ that an observation $X_{i}$ is drawn from $\operatorname{Pois}\left(\mu_{0}\right)$ and probability $1-\pi$ from $\operatorname{Pois}\left(\mu_{1}\right)$.
+Recall that if $X \sim \operatorname{Pois}(\mu)$, the probability density function is given by
+\begin{align}
+    p_{\mu}(x)=\frac{\mu^{x} e^{-\mu}}{x !}
+\end{align}
+
+\begin{itemize}
+    \item Define the observed data vector, the latent variable vector, and the distribution of the latent variable.
+    \item Write down the E step for estimating $\mu_{0}, \mu_{1}, \pi$.
+    \item Write down the $\mathrm{M}$ step for estimating $\mu_{0}, \mu_{1}, \pi$.
+    \item Give an initial estimator to start the EM algorithm.
+    \item Write $R$ code to implement the $E$ and $M$ steps.
+    \item Simulate data from a mixture of two Poisson distributions, where you know the true parameters, and run your EM algorithm on the simulated data. Show the accuracy of EM clustering as you vary the values of $\mu_{0}$ and $\mu_{1}$.
+    \item Now simulate data from a mixture of two binomial distributions, $\operatorname{Binom}\left(100, \pi_{0}\right)$ and $\operatorname{Binom}\left(100, \pi_{1}\right)$. Show the accuracy of your Poisson EM clustering algorithm as you vary the values of $\pi_{0}$ and $\pi_{1}$ in this misspecified model.
+\end{itemize}
+
+
+\section{Classification}
+Read section 7.2 (p.~121) on probit models in Freedman and complete questions 1, 2, and 3 in Exercise set B on page 124.
+
+\section{The Hat Matrix}
+The Sherman Morrison formula gives us an expression for the inverse of a rank-1 update to a matrix. if A is an invertible $n\times n$ matrix, and $u,v\in\real^n$, then:
+\begin{align}
+(A+uv^\perp)^{-1} = A^{-1} - \frac{A^{-1}uv^\top A^{-1}}{1+v^\top A^{-1}u}
+\end{align}
+Use this to prove equations (5.1) and (5.5) in Hoaglin, David C., and Roy E. Welsch. ``The hat matrix in regression and ANOVA.'' Note that they consider $\mathbf{x}_i$ a column vector---you can use either convention. Also, equation (5.5) contains a typo, and should be:
+\[\hat{\mathbf{\beta}}-\hat{\mathbf{\beta}}_{(i)} = \cdots \]
+
+\section{Miscellaneous}
+\begin{itemize}
+    \item In the two examples introduced by Freedman, the practitioners seek to perform inference for some parameters of interest. How do the scientific questions the practitioners wish to answer compare to the standard statistical formulation of significance tests?
+    \item Summarize a critique Freedman has for the ``subjective'' camp of statisticians. What are counterpoints this camp would respond with to this critique?
+    \item Summarize a critique Freedman has for the ``objective'' camp of statisticians. What does Freedman propose as a possible remedy for this critique?
+\end{itemize}
+
+
+\end{document}
