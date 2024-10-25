@@ -17,10 +17,15 @@ checkpoint_path = sys.argv[2]
 config = yaml.safe_load(open(config_path, "r"))
 
 print("Loading the saved model")
-# load the autoencoder from the checkpoint
+# initialize the autoencoder class
 model = Autoencoder(patch_size=config["data"]["patch_size"], **config["autoencoder"])
-checkpoint = torch.load(checkpoint_path)
+# tell PyTorch to load the model onto the CPU if no GPU is available
+map_location = None if torch.cuda.is_available() else 'cpu'
+# load checkpoint
+checkpoint = torch.load(checkpoint_path, map_location=map_location)
+# load the checkpoint's state_dict into the model
 model.load_state_dict(checkpoint["state_dict"])
+# put the model in evaluation mode
 model.eval()
 
 print("Making the patch data")
