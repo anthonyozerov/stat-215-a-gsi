@@ -27,7 +27,7 @@ Now that you have a PSC account, you can connect to Bridges-2. Bridges-2 contain
 
 One simple way to connect is via ssh. You can ssh to Bridges-2 with `ssh psc_username@bridges2.psc.edu` and put in the password for your PSC account. This will connect you to a "login node".
 
-Another way to connect is via their (online interface)[https://ondemand.bridges2.psc.edu], called Open OnDemand. It has a nice file browser and is where you will run jupyter notebooks. Please read the instructions later in this file before running anything :)
+Another way to connect is via their [online interface](https://ondemand.bridges2.psc.edu), called Open OnDemand. It has a nice file browser and is where you will run jupyter notebooks. Please read the instructions later in this file before running anything :)
 
 ## Setting up your Bridges-2 environment
 
